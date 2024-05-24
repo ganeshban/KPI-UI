@@ -1,60 +1,64 @@
 import { Link } from "react-router-dom";
-import ApiClient from "../services/ApiClient";
+// import ApiClient from "../services/ApiClient";
 import { useRef } from "react";
+import TextBox from "../components/TextBox";
 
 function LoginPage() {
-  const username = useRef(null);
-  const password = useRef(null);
+  const username = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+  const form = useRef<HTMLFormElement>(null);
   return (
     <div className="p-5 row justify-content-center">
       <h4 className="text-center">cIT App</h4>
-      <div className="row"></div>
-      <div className="col-sm-7 col-md-5 col-xl-4 col-xxl-3 border rounded justify-content-center">
+      <form
+        className="needs-validation col-sm-7 col-md-5 col-xl-4 col-xxl-3 border rounded"
+        noValidate
+        ref={form}
+      >
         <div className="row text-center m-3">
           <h6>Log Into your Account</h6>
         </div>
-        <div className="m-3 row justify-content-center">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            ref={username}
-            className="form-control"
-            id="username"
-            placeholder="Enter your username"
-          />
-        </div>
-        <div className="m-3 justify-content-center row">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            ref={password}
-            type="password"
-            className="form-control"
-            id="password"
-            placeholder="Password will be here . ..."
-          />
-        </div>
-        <div className="row mx-3 mt-5">
+
+        <TextBox
+          controller={username}
+          label="Username"
+          icon="person"
+          required={true}
+          autocomplete="username"
+        />
+
+        <TextBox
+          controller={password}
+          autocomplete="new-password"
+          minlength={8}
+          label="Password"
+          icon="lock"
+          required={true}
+          type="password"
+        />
+        <div className="row mt-5 px-2">
           <button
-            onClick={() => {
-              const client = new ApiClient("/user/all");
-              username.current;
-              const data = {
-                userName: "ganesh",
-                password: "ban",
-              };
-              const res = client.get();
-              console.log(res, data);
+            type="submit"
+            onClick={(event) => {
+              // const client = new ApiClient("/user/all");
+              // username.current;
+              // const data = {
+              //   userName: "ganesh",
+              //   password: "ban",
+              // };
+              // const res = client.get();
+              // console.log(res, data);
+              // event.preventDefault();
+
+              form.current?.classList.add("was-validated");
+              event.preventDefault();
             }}
             className="btn btn-outline-success"
           >
             Login
           </button>
         </div>
-        <div className="row mx-3 mb-5">
+        <div className="row mb-5">
           <Link
             className="link-offset-2 link-success link-underline link-underline-opacity-0"
             to="/reset"
@@ -62,7 +66,7 @@ function LoginPage() {
             Forget your Password ?
           </Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

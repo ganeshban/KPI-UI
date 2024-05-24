@@ -1,11 +1,12 @@
 import { useState } from "react";
+import logo from "../../public/vite.svg";
 import { Link } from "react-router-dom";
-import Button from "./Button";
 
 const Header = () => {
   const [zoomSize, setZoomSize] = useState(100);
+  const [toogle, setToogle] = useState(false);
 
-  function handleClick(size: number) {
+  function btnClick(size: number) {
     let finalSize = zoomSize + size;
     if (finalSize >= 70 && finalSize <= 130) {
       if (size === 0) finalSize = 100;
@@ -13,38 +14,67 @@ const Header = () => {
       setZoomSize(finalSize);
     }
   }
-  const clsName = "mx-1 px-1 btn btn-outline-light btn-sm w-content";
+  const show = toogle ? " show" : "";
+  const clsName = "mx-1 btn  btn-sm w-content";
   return (
     <>
-      <div className="container container-lg">hello</div>
-      <div className="m-1">
-        <nav className="navbar navbar-expand-lg">
+      <header className="bg-success bg-gradient pb-2">
+        <div className="text-end">
+          <button
+            className={clsName}
+            onClick={() => {
+              btnClick(5);
+            }}
+          >
+            A+
+          </button>
+          <button
+            onClick={() => {
+              btnClick(0);
+            }}
+            className={clsName}
+          >
+            A
+          </button>
+          <button
+            onClick={() => {
+              btnClick(-5);
+            }}
+            className={clsName}
+          >
+            A-
+          </button>
+        </div>
+
+        <nav className="navbar navbar-expand-md">
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
+              <img src={logo} alt="Logo" className="img-fluid" />
               <h6>Home</h6>
             </Link>
-            <Button
-              text="Users"
-              clsName="btn-outline-light btn"
-              // color="danger"
-            ></Button>
+            <Link className="navbar-brand" to="/user">
+              <p>Users</p>
+            </Link>
+            <Link className="navbar-brand" to="/user-group">
+              <p>User Group</p>
+            </Link>
+            <Link className="navbar-brand" to="/task">
+              <p>Task</p>
+            </Link>
+            <Link className="navbar-brand" to="/date">
+              <p>Date</p>
+            </Link>
             <button
               className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+              onClick={() => {
+                setToogle(!toogle);
+              }}
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
+            <div className={"collapse navbar-collapse" + show}>
+              <ul className="navbar-nav me-auto">
+                {/* <li className="nav-item">
                   <Link className="nav-link active" to="/signup">
                     Signup
                   </Link>
@@ -58,15 +88,10 @@ const Header = () => {
                   <Link className="nav-link" to="/notfound">
                     Not Found
                   </Link>
-                </li>
+                </li> */}
               </ul>
               <div className="d-flex" role="search">
                 <ul className="nav-item navbar-nav ">
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/signup">
-                      Sign Up
-                    </Link>
-                  </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/login">
                       Login
@@ -77,34 +102,7 @@ const Header = () => {
             </div>
           </div>
         </nav>
-
-        {/* //////// */}
-
-        <button
-          onClick={() => {
-            handleClick(5);
-          }}
-          className={clsName}
-        >
-          A+
-        </button>
-        <button
-          onClick={() => {
-            handleClick(0);
-          }}
-          className={clsName}
-        >
-          A
-        </button>
-        <button
-          onClick={() => {
-            handleClick(-5);
-          }}
-          className={clsName}
-        >
-          A-
-        </button>
-      </div>
+      </header>
     </>
   );
 };
