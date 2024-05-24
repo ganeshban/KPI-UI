@@ -25,14 +25,7 @@ function UserGroup() {
     <div className="container p-2 m-5 justify-content-center">
       <div className="row row-cols-10">
         <Card title="User Group Management" icon="group" className="col">
-          <form
-            ref={form}
-            className="needs-validation"
-            noValidate
-            // ref={form}
-          >
-            {/* <TextBox label="Username" required={true} />
-            <TextBox minlength={8} label="Passord" type="password" /> */}
+          <form ref={form} className="needs-validation" noValidate>
             {columns.map((col, i) => {
               return col != "Action" && <TextBox key={i} label={col}></TextBox>;
             })}
