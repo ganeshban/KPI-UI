@@ -1,5 +1,6 @@
 interface Props {
   autocomplete?: React.HTMLInputAutoCompleteAttribute;
+  classname?: string;
   controller?: React.LegacyRef<HTMLInputElement>;
   disabled?: boolean;
   error?: string[];
@@ -18,12 +19,13 @@ interface Props {
   size?: "" | "lg" | "sm";
   subfix?: string;
   tooltip?: string;
-  type?: "password" | "text" | "number" | "email";
+  type?: "password" | "text" | "number" | "email" | "date" | "time";
   value?: string;
   onclick?: () => void;
 }
 function TextBox({
   autocomplete,
+  classname,
   controller,
   disabled,
   error = [],
@@ -84,7 +86,7 @@ function TextBox({
           name={name}
           max={max}
           pattern={pattern}
-          className={"form-control " + inputSize}
+          className={`form-control ${inputSize} ${classname}`}
           autoComplete={autocomplete}
           id={id}
           required={required}

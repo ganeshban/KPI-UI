@@ -17,17 +17,17 @@ function Card({
   const [hideBody, setHideBody] = useState(false);
   return (
     <>
-      <div className={"card p-0 m-1 " + className}>
+      <div className={`card p-0 m-1 ${className}`}>
         <div
-          className="card-header fw-semibold"
+          className={`card-header`}
           onClick={() => {
             collapsible && setHideBody(!hideBody);
           }}
         >
-          <span className="align-top">
-            <i className="material-icons px-2">{icon}</i>
-          </span>
-          {title}
+          <h6>
+            <i className={`material-icons icons px-2`}>{icon}</i>
+            <span>{title}</span>
+          </h6>
         </div>
         {children && (
           <div className={"card-body"} hidden={hideBody}>

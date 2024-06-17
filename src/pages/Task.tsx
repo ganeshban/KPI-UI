@@ -6,75 +6,83 @@ import { useRef } from "react";
 function Task() {
   const data = [
     {
-      id: 1,
-      task: "New Member",
+      0: 1,
+      1: "New Member",
     },
     {
-      id: 2,
-      task: "Monthly saving",
+      0: 2,
+      1: "Monthly saving",
     },
     {
-      id: 3,
-      task: "Loan Collection",
+      0: 3,
+      1: "Loan Collection",
     },
     {
-      id: 4,
-      task: "Daily Colloction",
+      0: 4,
+      1: "Daily Colloction",
+    },
+    {
+      0: 5,
+      1: "Share Collection",
+    },
+    {
+      0: 6,
+      1: "Saving Deposite",
     },
   ];
-  const columns = ["Id", "Task Name", "Action"];
+  const columns = ["Id", "Task Name"];
+  const actionColumns = [
+    {
+      // name: "edit",
+      icon: "edit",
+      className: "text-primary",
+      onClick: "edit button",
+    },
+    {
+      // name: "remove",
+      icon: "delete_forever",
+      className: "text-danger",
+      onClick: "delete button",
+    },
+  ];
+
   const form = useRef<HTMLFormElement>(null);
   return (
-    <div className="container p-2 m-5 justify-content-center">
-      <div className="row row-cols-10">
-        <Card title="Task Form" icon="group" className="col">
-          <form
-            ref={form}
-            className="needs-validation"
-            noValidate
-            // ref={form}
-          >
-            {/* <TextBox label="Username" required={true} />
+    <div className="row ">
+      <Card title="Task Form" icon="group" className="col-sm">
+        <form
+          ref={form}
+          className="needs-validation"
+          noValidate
+          // ref={form}
+        >
+          {/* <TextBox label="Username" required={true} />
             <TextBox minlength={8} label="Passord" type="password" /> */}
-            {columns.map((col, i) => {
-              return col != "Action" && <TextBox key={i} label={col}></TextBox>;
-            })}
-            <div className="row mx-0 mt-5">
-              <button
-                type="submit"
-                onClick={(event) => {
-                  console.log(form);
-                  event.preventDefault();
-                }}
-                className="btn col btn-outline-success"
-              >
-                Save
-              </button>
-            </div>
-            <div className="row mb-5"></div>
-          </form>
-        </Card>
-        <Card title="List" icon="list" className="col">
-          <Table columnList={columns}>
-            <tbody>
-              {data.map((a, b) => {
-                return (
-                  <tr key={b}>
-                    <td>{a.id}</td>
-                    <td>{a.task}</td>
-                    <td>
-                      <i className="material-icons fs-3 text-primary">edit</i>
-                      <i className="material-icons fs-3 text-danger">
-                        delete_forever
-                      </i>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-        </Card>
-      </div>
+          {columns.map((col, i) => {
+            return col != "Action" && <TextBox key={i} label={col}></TextBox>;
+          })}
+          <div className="row mx-0 mt-5">
+            <button
+              type="submit"
+              onClick={(event) => {
+                console.log(form);
+                event.preventDefault();
+              }}
+              className="btn col btn-outline-success"
+            >
+              Save
+            </button>
+          </div>
+          <div className="row mb-5"></div>
+        </form>
+      </Card>
+      <Card title="List" icon="list" className="col">
+        <Table
+          columnList={columns}
+          tableData={data}
+          actionButtons={actionColumns}
+        ></Table>
+      </Card>
     </div>
   );
 }

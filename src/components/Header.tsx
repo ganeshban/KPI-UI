@@ -44,6 +44,20 @@ const Header = () => {
           >
             A-
           </button>
+          <button
+            onClick={() => {
+              const attr = "data-bs-theme";
+              const htmlNode = document.getElementsByTagName("html")[0];
+              const darkMode = htmlNode.getAttribute(attr);
+              darkMode === "dark"
+                ? htmlNode.removeAttribute(attr)
+                : htmlNode.setAttribute(attr, "dark");
+              localStorage.setItem("theme", darkMode ? "" : "dark");
+            }}
+            className={clsName}
+          >
+            <i className={`material-icons`}>cloud</i>
+          </button>
         </div>
 
         <nav className="navbar navbar-expand-md">
