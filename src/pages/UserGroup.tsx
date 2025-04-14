@@ -2,17 +2,21 @@ import TextBox from "../components/TextBox";
 import Card from "../components/Card";
 import Table from "../components/Table";
 import { useRef } from "react";
-// import { useEffect, useRef, useState } from "react";
-// import // UserGroupI,
-// // deleteByID,
-// // getAllUserGroup,
-// "../services/useUserGrps";
+// import { useEffect, useState } from "react";
+// import { UserGroupI, getAllUserGroup } from "../services/useUserGrps";
 // const x = getAllUserGroup();
 function UserGroup() {
   // const [data, setData] = useState<UserGroupI[]>([]);
-  // useEffect(() => {
-  //   x.then((a) => setData(a));
-  // });
+  const data = [
+    {
+      0: 1,
+      1: "New Member",
+    },
+    {
+      0: 2,
+      1: "Monthly saving",
+    },
+  ];
 
   const columns = ["Id", "Group Name"];
   const actionColumns = [
@@ -59,29 +63,11 @@ function UserGroup() {
         </form>
       </Card>
       <Card title="List" icon="list" className="col-sm">
-        <Table columnList={columns} actionButtons={actionColumns}>
-          {/* <tbody>
-              {data.map((a, b) => {
-                return (
-                  <tr key={b}>
-                    <td>{a.userGrpID}</td>
-                    <td>{a.userGrpName}</td>
-                    <td>
-                      <i
-                        className="material-icons fs-3 text-primary"
-                        onClick={() => handleEditClick(a.userGrpID)}
-                      >
-                        edit
-                      </i>
-                      <i className="material-icons fs-3 text-danger">
-                        delete_forever
-                      </i>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody> */}
-        </Table>
+        <Table
+          columnList={columns}
+          actionButtons={actionColumns}
+          tableData={data}
+        />
       </Card>
     </div>
   );

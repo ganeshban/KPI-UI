@@ -1,66 +1,54 @@
-import { Link } from "react-router-dom";
-// import ApiClient from "../services/ApiClient";
 import { useRef } from "react";
 import TextBox from "../components/TextBox";
 import { appName } from "../utils/Constants";
 import Card from "../components/Card";
+import axios from "axios";
 
-function LoginPage() {
-  const username = useRef<HTMLInputElement>(null);
-  const password = useRef<HTMLInputElement>(null);
+function SMS() {
+  const recever = useRef<HTMLInputElement>(null);
+  const text = useRef<HTMLInputElement>(null);
   const form = useRef<HTMLFormElement>(null);
   return (
     <div className="p-5 row justify-content-center">
       <h4 className="text-center">{appName}</h4>
       <Card
-        title="Log into your Account"
+        title="SMS"
         className="col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3 border rounded justify-content-center"
       >
         <form noValidate ref={form}>
           <TextBox
-            controller={username}
-            label="Username"
-            icon="person"
+            controller={recever}
+            label="Recever"
             required={true}
-            autocomplete="username"
+            autocomplete="recever"
           />
-          <TextBox
-            controller={password}
-            autocomplete="new-password"
-            minlength={8}
-            label="Password"
-            icon="lock"
-            required={true}
-            type="password"
-          />
+          <TextBox controller={text} label="Text" required={true} />
           <div className="row mt-5 px-2">
             <button
               type="submit"
               onClick={(event) => {
                 // const client = new ApiClient("/user/all");
-                // username.current;
+                // recever.current;
                 // const data = {
-                //   userName: "ganesh",
-                //   password: "ban",
+                //   recever: "ganesh",
+                //   text: "ban",
                 // };
                 // const res = client.get();
                 // console.log(res, data);
                 // event.preventDefault();
                 form.current?.classList.add("was-validated");
                 event.preventDefault();
+                const api = axios.create({ baseURL: "http:/localhost:8081" });
+                api.post("sms/code/create", {
+                  receiver: recever.current?.value,
+                  message: text.current?.value,
+                  clientCode: "code",
+                });
               }}
               className="btn btn-outline-success"
             >
-              Login
+              Send
             </button>
-          </div>
-          <div className="row">
-            <Link
-              className="link-offset-2 link-success link-underline link-underline-opacity-0"
-              to="/reset"
-            >
-              Forget your Password ?
-            </Link>
           </div>
         </form>
       </Card>
@@ -68,4 +56,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default SMS;

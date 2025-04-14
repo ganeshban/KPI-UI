@@ -36,7 +36,7 @@ function Task() {
       // name: "edit",
       icon: "edit",
       className: "text-primary",
-      onClick: "edit button",
+      onClick: "",
     },
     {
       // name: "remove",

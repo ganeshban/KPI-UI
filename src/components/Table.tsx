@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "bootstrap/dist/js/bootstrap.bundle.js";
+import Dialog from "./Dialog";
 // import "bootstrap/dist/jsbootstrap.bundle.min.js/bootstrap.bundle.js";
 
 export type dataField = { [key: number | string]: string | number };
@@ -14,6 +15,7 @@ export interface ColumnType {
   sortable?: boolean;
   width?: number | "auto";
   align?: "center" | "left" | "justify" | "right" | "char" | undefined;
+  field?: string;
 }
 interface Props {
   actionButtons?: ActionButtonColumn[];
@@ -132,7 +134,7 @@ const Table = ({
               }`}
             >
               <a className="page-link" onClick={() => setCurrentPageNumber(1)}>
-                First
+                ←
               </a>
             </li>
           }
@@ -148,7 +150,7 @@ const Table = ({
                   setCurrentPageNumber(currentPageNumber - 1);
                 }}
               >
-                Previous
+                ⇠
               </a>
             </li>
           }
@@ -187,8 +189,12 @@ const Table = ({
                 className="page-link"
                 onClick={() => setCurrentPageNumber(currentPageNumber + 1)}
               >
-                Next
+                ⇢
               </a>
+              <Dialog
+                title="Conformation"
+                content="Are you sure to delete the item ?"
+              />
             </li>
           }
           {
@@ -201,13 +207,12 @@ const Table = ({
                 className="page-link"
                 onClick={() => setCurrentPageNumber(totalPageNo)}
               >
-                Last
+                →
               </a>
             </li>
           }
-
           <button
-            className="btn btn-outline-primary btn-sm dropdown-toggle ms-2"
+            className="btn btn-sm border dropdown-toggle mx-2"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -219,7 +224,12 @@ const Table = ({
               return (
                 <li
                   className="dropdown-item"
-                  onClick={() => setItemPerPage(a)}
+                  onClick={() => {
+                    setItemPerPage(a);
+                    if (start > end) {
+                      setCurrentPageNumber(totalPageNo);
+                    }
+                  }}
                   key={b}
                 >
                   {a}
@@ -227,6 +237,8 @@ const Table = ({
               );
             })}
           </ul>
+          item {start + 1}-{Math.min(end, tableData!.length)} of{" "}
+          {tableData!.length}
         </ul>
       )}
     </div>

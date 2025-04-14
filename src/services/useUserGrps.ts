@@ -5,7 +5,7 @@ export interface UserGroupI {
   userGrpName: string;
 }
 
-const client = new ApiClient<UserGroupI>("usergrp");
+const client = new ApiClient<UserGroupI>("userGrp");
 
 export const getAllUserGroup = () => {
   const data = client.get("all").then((a) => a.data);
