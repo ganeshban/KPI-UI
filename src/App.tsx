@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Suspense } from "react";
 import { Modal } from "react-bootstrap";
+// import { TodoList } from "./services/TodoList";
 
 function App() {
   const darkMode = localStorage.getItem("theme");
@@ -27,6 +28,7 @@ function App() {
           }
         >
           <Body />
+          {/* <TodoList /> */}
         </Suspense>
       </div>
       <Footer />

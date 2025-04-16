@@ -1,3 +1,15 @@
 export const currentYear = new Date().getFullYear();
 export const appName = import.meta.env.VITE_APP_NAME;
 export const version = "v" + import.meta.env.VITE_APP_VERSION;
+export const CACHE_KEY_USER = ["user"];
+export const URL_HOME_PAGE = "/";
+export const URL_LOGIN_PAGE = "/login";
+export const URL_RESET_PASSWORD_PAGE = "/reset";
+export const URL_USER_PAGE = "/user";
+export const URL_USER_GROUP_PAGE = "/user-group";
+export const URL_DATE_PAGE = "/date";
+export const URL_SMS_PAGE = "/sms";
+export const URL_TASK_PAGE = "/task";
+export const URL_UNAUTHORIZED_PAGE = "/unauthorized";
+export const URL_CHANGE_PASSWORD_PAGE = "/changepassword";
+export const URL_TERMS_PAGE = "/terms";

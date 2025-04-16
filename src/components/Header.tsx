@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logo from "../../public/vite.svg";
 import { Link } from "react-router-dom";
+import { URL_USER_GROUP_PAGE, URL_USER_PAGE } from "../utils/Constants";
 
 const Header = () => {
   const [zoomSize, setZoomSize] = useState(100);
@@ -66,10 +67,19 @@ const Header = () => {
               <img src={logo} alt="Logo" className="img-fluid" />
               <h6>Home</h6>
             </Link>
-            <Link className="navbar-brand" to="/user">
+            {/* <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" /> */}
+            <Link className="navbar-brand" to={URL_USER_PAGE}>
               <p>Users</p>
             </Link>
-            <Link className="navbar-brand" to="/user-group">
+            <Link className="navbar-brand" to={URL_USER_GROUP_PAGE}>
               <p>User Group</p>
             </Link>
             <Link className="navbar-brand" to="/task">
@@ -88,7 +98,7 @@ const Header = () => {
             </button>
             <div className={"collapse navbar-collapse" + show}>
               <ul className="navbar-nav me-auto">
-                {/* <li className="nav-item">
+                <li className="nav-item">
                   <Link className="nav-link active" to="/signup">
                     Signup
                   </Link>
@@ -102,7 +112,7 @@ const Header = () => {
                   <Link className="nav-link" to="/notfound">
                     Not Found
                   </Link>
-                </li> */}
+                </li>
               </ul>
               <div className="d-flex" role="search">
                 <ul className="nav-item navbar-nav ">
@@ -118,6 +128,14 @@ const Header = () => {
         </nav>
       </header>
     </>
+  );
+};
+
+export const MyLink = (name: string, url: string) => {
+  return (
+    <Link className="navbar-brand" to={url}>
+      <p>{name}</p>
+    </Link>
   );
 };
 

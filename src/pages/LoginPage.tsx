@@ -4,11 +4,16 @@ import { useRef } from "react";
 import TextBox from "../components/TextBox";
 import { appName } from "../utils/Constants";
 import Card from "../components/Card";
+import { useLogin } from "../hooks/useLogin";
 
 function LoginPage() {
+  const response = useLogin();
   const username = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const form = useRef<HTMLFormElement>(null);
+  const errorMsg = response.error && (
+    <div className="alert alert-danger">{response.error.message}</div>
+  );
   return (
     <div className="p-5 row justify-content-center">
       <h4 className="text-center">{appName}</h4>
@@ -33,21 +38,20 @@ function LoginPage() {
             required={true}
             type="password"
           />
+          {errorMsg}
           <div className="row mt-5 px-2">
             <button
               type="submit"
               onClick={(event) => {
-                // const client = new ApiClient("/user/all");
-                // username.current;
-                // const data = {
-                //   userName: "ganesh",
-                //   password: "ban",
-                // };
-                // const res = client.get();
-                // console.log(res, data);
-                // event.preventDefault();
                 form.current?.classList.add("was-validated");
                 event.preventDefault();
+                if (!form.current?.checkValidity()) {
+                  return;
+                }
+                response.mutate({
+                  username: username.current!.value,
+                  password: password.current!.value,
+                });
               }}
               className="btn btn-outline-success"
             >

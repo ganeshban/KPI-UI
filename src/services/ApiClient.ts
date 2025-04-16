@@ -3,32 +3,35 @@ const baseURL = import.meta.env.VITE_BACKEND_URL;
 const axiosClient = axios.create({
   baseURL: baseURL,
 });
-interface Response<T> {
-  data: T[];
-  count: number;
-}
 
-class ApiClient<T> {
+class ApiClient<T, R> {
   endpoint: string;
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
 
-  get = async (url?: string) => {
+  getURL = (url?: string) => {
     const finalURL = url ? `${this.endpoint}/${url}` : this.endpoint;
-    const res = (await axiosClient.get<Response<T>>(finalURL)).data;
-    return res;
+    return axiosClient.get<T>(finalURL).then((res) => res.data);
+  };
+  get = () => {
+    return this.getURL(this.endpoint);
   };
 
-  post = async (url?: string, data?: T) => {
+  postURL = (url?: string, data?: R) => {
     const finalURL = url ? `${this.endpoint}/${url}` : this.endpoint;
-    const res = await axiosClient.post<T>(finalURL, data);
-    return res.data;
+
+    axiosClient.post<R>(finalURL, data).then((res) => res.data);
   };
-  delete = async (id?: number) => {
-    const finalURL = id ? `${this.endpoint}/${id}` : this.endpoint;
-    const res = (await axiosClient.delete<Response<T>>(finalURL)).data;
-    return res.data;
+  post = (data?: R) => {
+    return this.postURL(this.endpoint, data);
+  };
+  deleteURL = (url?: string) => {
+    const finalURL = url ? `${this.endpoint}/${url}` : this.endpoint;
+    return axiosClient.delete<T>(finalURL).then((res) => res.data);
+  };
+  delete = () => {
+    return this.deleteURL(this.endpoint);
   };
 }
 export default ApiClient;

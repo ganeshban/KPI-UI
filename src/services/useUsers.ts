@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ApiClient from "./ApiClient";
 import { UserGroupI } from "./useUserGrps";
 
-export interface UserI {
+export interface User {
   id: number;
   username: string;
   password: string;
@@ -12,9 +12,9 @@ export interface UserI {
   userGroup: UserGroupI;
 }
 
-const client = new ApiClient<UserI>("user");
+const client = new ApiClient<User>("user");
 export const useGetAllUser = () => {
-  const [users, setUsers] = useState<UserI[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     const x = client.get("all").then((a) => a.data);
     x.then((a) => {
