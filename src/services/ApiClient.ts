@@ -3,32 +3,39 @@ const baseURL = import.meta.env.VITE_BACKEND_URL;
 const axiosClient = axios.create({
   baseURL: baseURL,
 });
-
-class ApiClient<T, R> {
+export interface Response {
+  requestAt: string;
+  responseAt: string;
+  status: [];
+  count: number;
+  data: object;
+}
+class ApiClient<T> {
   endpoint: string;
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
+  const getHeaders=()=>{
+    return {
+      
+    }
+  }
 
-  getURL = (url?: string) => {
-    const finalURL = url ? `${this.endpoint}/${url}` : this.endpoint;
-    return axiosClient.get<T>(finalURL).then((res) => res.data);
+  getURL = (url: string) => {
+    return axiosClient.get<Response>(url).then((res) => res.data);
   };
   get = () => {
     return this.getURL(this.endpoint);
   };
 
-  postURL = (url?: string, data?: R) => {
-    const finalURL = url ? `${this.endpoint}/${url}` : this.endpoint;
-
-    axiosClient.post<R>(finalURL, data).then((res) => res.data);
+  postURL = (url: string, data?: T) => {
+    return axiosClient.post<Response>(url, data).then((res) => res.data);
   };
-  post = (data?: R) => {
+  post = (data?: T) => {
     return this.postURL(this.endpoint, data);
   };
-  deleteURL = (url?: string) => {
-    const finalURL = url ? `${this.endpoint}/${url}` : this.endpoint;
-    return axiosClient.delete<T>(finalURL).then((res) => res.data);
+  deleteURL = (url: string) => {
+    return axiosClient.delete<Response>(url).then((res) => res.data);
   };
   delete = () => {
     return this.deleteURL(this.endpoint);

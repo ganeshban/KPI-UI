@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { apiClient, Login, Response } from "../services/loginServices";
+import { apiClient, Login, LoginResponse } from "../services/loginServices";
+import { Response } from "../services/ApiClient";
 
 export const useLogin = () => {
   return useMutation<Response, Error, Login>({
@@ -9,7 +10,7 @@ export const useLogin = () => {
     //   axios.post(loginServices.endpoint, login).then((res) => res.data),
 
     onSuccess: (resp: Response, payload: Login) => {
-      localStorage.setItem("user", resp.token);
+      localStorage.setItem("user", (resp.data as LoginResponse).token);
       return payload;
     },
   });

@@ -13,3 +13,4 @@ export const URL_TASK_PAGE = "/task";
 export const URL_UNAUTHORIZED_PAGE = "/unauthorized";
 export const URL_CHANGE_PASSWORD_PAGE = "/changepassword";
 export const URL_TERMS_PAGE = "/terms";
+export const API_URL_LOG_IN = "/login";

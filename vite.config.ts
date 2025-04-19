@@ -6,7 +6,7 @@ const API_PROXY_TARGET = process.env.VITE_BACKEND_URL;
 const AUTH_TOKEN = `Bearer ${process.env.VITE_API_TOKEN}`;
 
 // List of proxy paths
-const proxyPaths = ["/api/special", "/api/secure", "/api/protected"];
+const proxyPaths = ["/api/special", "/api/secure", "/api/protected", "/login"];
 
 // Create proxy entries with custom headers
 const proxyConfig: Record<string, string | ProxyOptions> = {};
@@ -18,6 +18,7 @@ proxyPaths.forEach((path) => {
       proxy.on("proxyReq", (proxyReq) => {
         proxyReq.setHeader("Authorization", AUTH_TOKEN);
         proxyReq.setHeader("X-Custom-Header", "custom-value");
+        proxyReq.setHeader("Access-Control-Allow-Origin", "true");
       });
     },
   };

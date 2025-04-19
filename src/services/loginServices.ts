@@ -4,12 +4,12 @@ export interface Login {
   username: string;
   password: string;
 }
-export interface Response {
+export interface LoginResponse {
   token: string;
   user: User;
 }
-export const apiClient = new ApiClient<Login, Response>("login");
+export const apiClient = new ApiClient<Login>("login");
 
-// export const useLogin = () => {
-//   return (loginParam: Login) => apiClient.post(loginParam);
-// };
+export const login = (loginParam: Login) => {
+  return apiClient.post(loginParam);
+};
