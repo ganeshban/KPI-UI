@@ -1,6 +1,9 @@
+import packageJson from "../../package.json";
+
+export const appName = packageJson.appName;
+export const version = "v" + packageJson.version;
+
 export const currentYear = new Date().getFullYear();
-export const appName = import.meta.env.VITE_APP_NAME;
-export const version = "v" + import.meta.env.VITE_APP_VERSION;
 export const CACHE_KEY_USER = ["user"];
 export const URL_HOME_PAGE = "/";
 export const URL_LOGIN_PAGE = "/login";

@@ -15,11 +15,11 @@ class ApiClient<T> {
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
-  const getHeaders=()=>{
-    return {
-      
-    }
-  }
+  // const getHeaders=()=>{
+  //   return {
+
+  //   }
+  // }
 
   getURL = (url: string) => {
     return axiosClient.get<Response>(url).then((res) => res.data);

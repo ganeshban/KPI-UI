@@ -1,8 +1,7 @@
 import TextBox from "../components/TextBox";
-import Card from "../components/Card";
 import Table from "../components/Table";
 import { useRef } from "react";
-
+import { Panel } from "primereact/panel";
 function Users() {
   const columns = [
     { name: "id" },
@@ -27,17 +26,22 @@ function Users() {
     },
   ];
   const form = useRef<HTMLFormElement>(null);
+  const formHeader = (
+    <div className="">
+      <i className="pi pi-user mx-2"></i>
+      <span>User Management</span>
+    </div>
+  );
+  const listHeader = (
+    <div className="">
+      <i className="pi pi-bars mx-2"></i>
+      <span>User List</span>
+    </div>
+  );
   return (
     <div className="row">
-      <Card title="User Management" icon="person" className="col-sm">
-        <form
-          ref={form}
-          className="needs-validation"
-          noValidate
-          // ref={form}
-        >
-          {/* <TextBox label="Username" required={true} />
-            <TextBox minlength={8} label="Passord" type="password" /> */}
+      <Panel header={formHeader} className="col-sm">
+        <form ref={form} className="needs-validation" noValidate>
           {columns.map((col, i) => {
             return (
               <TextBox
@@ -46,7 +50,14 @@ function Users() {
               />
             );
           })}
-          <div className="row mx-0 mt-5">
+          <div className="row mx-0 mt-2">
+            {/* <Button
+              severity="success"
+              label="Save"
+              outlined
+              icon="pi pi-save"
+              size="small"
+            /> */}
             <button
               type="submit"
               onClick={(event) => {
@@ -58,12 +69,12 @@ function Users() {
               Save
             </button>
           </div>
-          <div className="row mb-5"></div>
+          <div className="row mb-2"></div>
         </form>
-      </Card>
-      <Card title="User List" icon="list" className="col-sm">
+      </Panel>
+      <Panel className="col-sm" header={listHeader}>
         <Table columnList={columns} actionButtons={actionColumns} />
-      </Card>
+      </Panel>
     </div>
   );
 }

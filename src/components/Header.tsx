@@ -74,8 +74,8 @@ const Header = () => {
             <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
             <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
             <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
-            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />
-            <MyLink url={URL_USER_GROUP_PAGE} name="USER" /> */}
+            <MyLink url={URL_USER_GROUP_PAGE} name="USER" />*/}
+            <MyLink url={URL_USER_GROUP_PAGE} name="Home" />
             <Link className="navbar-brand" to={URL_USER_PAGE}>
               <p>Users</p>
             </Link>
@@ -130,11 +130,15 @@ const Header = () => {
     </>
   );
 };
-
-export const MyLink = (name: string, url: string) => {
+type LinkProps = { url: string; name: string; className?: string };
+export const MyLink = ({
+  url,
+  name,
+  className = "nav-link",
+}: LinkProps): JSX.Element => {
   return (
-    <Link className="navbar-brand" to={url}>
-      <p>{name}</p>
+    <Link className={className} to={url}>
+      {name}
     </Link>
   );
 };
