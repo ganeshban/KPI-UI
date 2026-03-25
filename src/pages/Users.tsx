@@ -2,6 +2,7 @@ import TextBox from "../components/TextBox";
 import Table from "../components/Table";
 import { useRef } from "react";
 import { Panel } from "primereact/panel";
+import NewTable from "../components/NewTable";
 function Users() {
   const columns = [
     { name: "id" },
@@ -74,6 +75,9 @@ function Users() {
       </Panel>
       <Panel className="col-sm" header={listHeader}>
         <Table columnList={columns} actionButtons={actionColumns} />
+      </Panel>
+      <Panel className="col-sm" header={listHeader}>
+        <NewTable />
       </Panel>
     </div>
   );
